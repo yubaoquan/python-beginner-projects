@@ -1,0 +1,18 @@
+line-length = 100
+
+[format]
+quote-style = "single"
+line-ending = "lf"
+indent-style = "space"
+preview = true
+
+[lint]
+select = ["E", "F"]
+ignore = ["E302", "E305"]
+preview = true
+
+[lint.flake8-quotes]
+multiline-quotes = "single"
+
+[lint.isort]
+lines-after-imports = 1
