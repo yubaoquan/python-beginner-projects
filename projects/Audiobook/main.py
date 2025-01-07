@@ -6,19 +6,40 @@ import keyboard  # Import the keyboard library
 pdf = None
 stop_thread = False  # Variable to signal stopping the playback
 
+def showLanguages(engine):
+    voices = engine.getProperty('voices')
+
+    for voice in voices:
+        print(f"Voice: {voice.name}")
+        print(f"ID: {voice.id}")
+        print(f"Languages: {voice.languages}")
+        print("-" * 20)
+        if "English" in voice.name:
+            engine.setProperty('voice', voice.id)
+            print(f"Setting English voice: {voice.name}")
+            break  # Exit after setting the voice
 
 def play(pdfReader):
     global pdf
     global stop_thread
 
     speaker = pyttsx3.init()
+    showLanguages(speaker)
 
     for page_num in range(len(pdfReader.pages)):
-        if stop_thread:
-            break  # Exit the loop if stop_thread is True
         text = pdfReader.pages[page_num].extract_text()
-        speaker.say(text)
-        speaker.runAndWait()
+        sentences = text.split("\n")
+        # forEach sentences, print each sentence and sentence index
+        for sentenceIndex, sentence in enumerate(sentences):
+            print(f"{sentenceIndex + 1}: {sentence}")
+            if stop_thread:
+                print("Playback stopped.")
+                break  # Exit the loop if stop_thread is True
+            speaker.say(sentence)
+            speaker.runAndWait()
+        if stop_thread:
+            print("Outer loop: playback stopped.")
+            break  # Exit the loop if stop_thread is True
 
     speaker.stop()
 
@@ -47,6 +68,7 @@ playback_thread.start()
 # Start a thread for stopping playback with keyboard input
 keyboard.add_hotkey("q", lambda: stop_playback())
 keyboard.wait()  # Wait for the hotkey event
-
+print(111)
 # Wait for the playback to finish
 playback_thread.join()
+print(222)
