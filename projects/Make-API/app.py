@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def life():
-    fin = open("Make-API//quote.txt", "r")
+    fin = open("./quote.txt", "r")
     Random_line = random.randint(0, 2)
     quote = fin.readlines()[Random_line]
     return jsonify(quote[0:-1])

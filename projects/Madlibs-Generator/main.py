@@ -39,15 +39,17 @@ def generate_madlib_button_click():
 
 # Create the main window
 root = tk.Tk()
-root.title("Mad Libs Game")
 
-#
+print(tk.TkVersion)
+root.title("Mad Libs Game")
+root.geometry("600x400")
+
 choice_label = tk.Label(
     root,
     text="""
-Choose a Mad Lib story : 
-1.In a mystical and distant land..  
-2.In the enchanting world of...  
+Choose a Mad Lib story :
+1.In a mystical and distant land..
+2.In the enchanting world of...
 3.In the bustling city of...""",
 )
 

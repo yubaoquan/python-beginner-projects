@@ -13,6 +13,3 @@ preview = true
 
 [lint.flake8-quotes]
 multiline-quotes = "single"
-
-[lint.isort]
-lines-after-imports = 1
